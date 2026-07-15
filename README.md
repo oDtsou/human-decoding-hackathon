@@ -7,7 +7,7 @@ This project explores how the human prefrontal cortex dynamically encodes and ma
 ---
 
 ## 📂 The Data
-Because the raw data files are incredibly large (~2 GB each), **do not upload them to GitHub**. 
+Because the raw data files are incredibly large (~2 GB each), **we do not upload them to GitHub**. 
 
 * **Full Datasets (Download Here):** 
   * *Spatial Task Dataset* (https://vanderbilt.box.com/s/gfh6lnjqqzm0n31gty8c4h3jj82rbnyn)
