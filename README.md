@@ -26,7 +26,7 @@ Each channel struct has the following fields:
 *   `Prefrontal_subdiv`: Prefrontal subdivision (e.g., `'Dorsal'`, `'Ventral'`) used for our primary comparative analysis
 *   `Hemisphere`: Hemisphere of the implant
 *   `CorrectTrials` or `Correct`: A struct array containing trials that were performed correctly. Each element/trial in this array has the following fields for which we care about:
-    *   `Class`: The stimulus class/spatial location (1-9 or 1-8)
+    *   `Class`: The stimulus class location (1-9 or 1-8)
     *   `TrialData`: The raw time-series voltage data for the trial
     *   `Common`: Common-average reference (CAR) filtered time-series data
     *   `Laplacian`: Local Laplacian-filtered time-series data
