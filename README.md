@@ -69,7 +69,7 @@ num_correct = length(SEEG(1).Correct);
 
 ## 📖 Scientific Background & Baseline Logic
 Before diving into code, please read our comprehensive decoding draft document:
-👉 **[Read the Decoding Logic & Existing Results Guide](docs/DECODING_LOGIC.md)**
+👉 **[Read the Decoding Logic & Existing Results Guide](docs/DecodingLogic_Hackathon.pdf)**
 
 This document details the logic behind our current high-gamma SVM approach and shows our existing Non-Human Primate (NHP) and human decoding results.
 
