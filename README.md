@@ -75,9 +75,22 @@ This document details the logic behind our current high-gamma SVM approach and s
 
 ---
 
-## 🛠️ Getting Started (Python Setup)
+## 🛠️ Getting Started (MATLAB Setup)
 Clone the repository and install the required dependencies:
 ```bash
-git clone [https://github.com/your_username/human-spatial-decoding-hackathon.git](https://github.com/your_username/human-spatial-decoding-hackathon.git)
+git clone [https://github.com/oDtsou/human-decoding-hackathon.git](https://github.com/oDtsou/human-decoding-hackathon.git)
+cd human-decoding-hackathon
+```
+```matlab
+% Add project directories to path
+addpath(genpath(pwd));
+savepath;
+```
+
+(Python Setup)
+Clone the repository and install the required dependencies:
+```bash
+git clone [https://github.com/oDtsou/human-decoding-hackathon.git](https://github.com/oDtsou/human-decoding-hackathon.git)
 cd human-decoding-hackathon
 pip install -r requirements.txt
+```
