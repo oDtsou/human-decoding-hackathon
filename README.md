@@ -12,7 +12,6 @@ Because the raw data files are incredibly large (~2 GB each), **do not upload th
 * **Full Datasets (Download Here):** 
   * *Spatial Task Dataset* (https://vanderbilt.box.com/s/gfh6lnjqqzm0n31gty8c4h3jj82rbnyn)
   * *Feature Task Dataset* (https://vanderbilt.box.com/s/jw50ka2281j2dh95it49dle5qbdvftpb)
-* **Mock Dataset (For Fast Debugging):** Located in `/data/mock_data.mat`. Use this small file to test your scripts locally without waiting for a massive download!
 
 ### Data Format & Schema
 The data are stored in `.mat` files containing a single variable `SEEG`, which is a `1 × 462` struct array. Each element in the array represents a unique recording channel pooled across different subjects. 
@@ -49,21 +48,21 @@ trial_signal = first_trial.Laplacian; % You can also use .TrialData or .Common
 
 % Quick check: Count how many correct trials exist for this channel
 num_correct = length(SEEG(1).Correct);
-
+```
 ---
 
 ## 🚀 BrainHack Milestones
 
 ### 🟢 Milestone 1: Data Cleaning & Visualization (Low Complexity)
 * **Goal:** Parse the raw `.mat` files. Identify and filter out noisy clinical channels that lack a sufficient trial count per class.
-* **Deliverable:** A script (`scripts/data_ingestion.py`) that returns "viable" channels and plots their power spectra.
+* **Deliverable:** A script (`scripts/...`) that returns "viable" channels and plots their power spectra.
 
 ### 🟡 Milestone 2: Feature Engineering (Medium Complexity)
 * **Goal:** Benchmark alternative features against our baseline 70–150 Hz high-gamma moving average.
-* **Deliverable:** Implement alternative features in `scripts/preprocessing.py`.
+* **Deliverable:** Implement alternative features in `scripts/...`.
 
 ### 🔴 Milestone 3: Time-Resolved Low-Sample Decoding (High Complexity)
-* **Goal:** Build time-resolved SVM classifiers (which handle small sample sizes like our 3 trials/class brilliantly) to decode memory targets.
+* **Goal:** Build time-resolved SVM classifiers (which handle small sample sizes like our 3 trials/class brilliantly) to decode classes.
 * **Deliverable:** Map and compare decoding accuracies over time between the **Dorsal** and **Ventral** subregions.
 
 ---
@@ -80,5 +79,5 @@ This document details the logic behind our current high-gamma SVM approach and s
 Clone the repository and install the required dependencies:
 ```bash
 git clone [https://github.com/your_username/human-spatial-decoding-hackathon.git](https://github.com/your_username/human-spatial-decoding-hackathon.git)
-cd human-spatial-decoding-hackathon
+cd human-decoding-hackathon
 pip install -r requirements.txt
