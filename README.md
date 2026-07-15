@@ -14,7 +14,7 @@ Because the raw data files are incredibly large (~2 GB each), **we do not upload
   * *Feature Task Dataset* (https://vanderbilt.box.com/s/jw50ka2281j2dh95it49dle5qbdvftpb)
 
 ### Data Format & Schema
-The data are stored in `.mat` files containing a single variable `SEEG`, which is a `1 × 462` struct array. Each element in the array represents a unique recording channel pooled across different subjects. 
+The data are stored in `.mat` files containing a single variable `SEEG`, which is a `1 × N` struct array where `N` is the number of channels. Each element in the array represents a unique recording channel pooled across different subjects. 
 
 Each channel struct has the following fields:
 *   `Sub`: Subject identifier (string/character array)
