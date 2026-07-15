@@ -2,7 +2,7 @@
 
 Welcome to the official repository for the **BrainHack Vanderbilt 2026** project! 
 
-This project explores how the human prefrontal cortex dynamically encodes and maintains environmental architecture during spatial and feature-based working memory tasks using rare human intracranial stereo-EEG (sEEG) recordings.
+This project explores how the human prefrontal cortex dynamically encodes and maintains environmental architecture during spatial and feature-based working memory tasks using human intracranial stereo-EEG (sEEG) recordings.
 
 ---
 
