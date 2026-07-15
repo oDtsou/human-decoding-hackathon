@@ -54,7 +54,7 @@ num_correct = length(SEEG(1).Correct);
 ## 🚀 BrainHack Milestones
 
 ### 🟢 Milestone 1: Data Cleaning & Visualization (Low Complexity)
-* **Goal:** Parse the raw `.mat` files. Identify and filter out noisy clinical channels that lack a sufficient trial count per class.
+* **Goal:** Parse the raw `.mat` files. Identify and filter out clinical channels that lack a sufficient trial count per class.
 * **Deliverable:** A script (`scripts/...`) that returns "viable" channels and plots their power spectra.
 
 ### 🟡 Milestone 2: Feature Engineering (Medium Complexity)
