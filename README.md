@@ -87,10 +87,4 @@ addpath(genpath(pwd));
 savepath;
 ```
 
-(Python Setup)
-Clone the repository and install the required dependencies:
-```bash
-git clone [https://github.com/oDtsou/human-decoding-hackathon.git](https://github.com/oDtsou/human-decoding-hackathon.git)
-cd human-decoding-hackathon
-pip install -r requirements.txt
-```
+
