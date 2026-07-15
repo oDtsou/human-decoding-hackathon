@@ -62,7 +62,7 @@ num_correct = length(SEEG(1).Correct);
 * **Deliverable:** Implement alternative features in `scripts/...`.
 
 ### 🔴 Milestone 3: Time-Resolved Low-Sample Decoding (High Complexity)
-* **Goal:** Build time-resolved SVM classifiers (which handle small sample sizes like our 3 trials/class brilliantly) to decode classes.
+* **Goal:** Build time-resolved classifiers (which handle small sample sizes like our 3 trials/class brilliantly) to decode classes.
 * **Deliverable:** Map and compare decoding accuracies over time between the **Dorsal** and **Ventral** subregions.
 
 ---
