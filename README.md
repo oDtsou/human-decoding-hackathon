@@ -74,6 +74,14 @@ Stereo-EEG local field potentials (LFPs) are processed using two spatial re-refe
 
 ---
 
+## 📖 Scientific Background & Baseline Logic
+Before diving into code, please read our comprehensive decoding draft document:
+👉 **[Read the Decoding Logic & Existing Results Guide](docs/DecodingLogic_Hackathon.pdf)**
+
+This document details the logic behind our current high-gamma SVM approach and shows our existing Non-Human Primate (NHP) and human decoding results.
+
+---
+
 ## 🛠️ Getting Started & Prerequisites
 
 ### 1. MATLAB Installation & Licensing
