@@ -67,6 +67,9 @@ $$V^{\text{LAP}}_i(t) = V_i(t) - \frac{V_{i-1}(t) + V_{i+1}(t)}{2}$$
 ### 🟢 Milestone 1: Data Cleaning & Visualization (Low Complexity)
 * **Goal:** Parse `.mat` files, evaluate trial balances across classes, and remove noisy/sparse channels.
 * **Deliverable:** Run and extend `scripts/visualization.m` to plot raw vs. CAR vs. Laplacian traces and power spectral densities (PSD).
+* To run it:
+       1. Download the dataset and place it in the `data/` folder.
+       2. Open and run `scripts/visualization.m` in MATLAB.
 
 ### 🟡 Milestone 2: Feature Engineering (Medium Complexity)
 * **Goal:** Extract time-frequency features (e.g., 70–150 Hz high-gamma power, multi-band power spectral densities, wavelets) to improve signal representation.
