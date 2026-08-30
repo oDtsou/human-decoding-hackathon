@@ -44,15 +44,19 @@ Each channel struct includes:
 
 ## 🔬 Signal Referencing Schemes
 
-Stereo-EEG local field potentials (LFPs) are processed using two spatial re-referencing methods to control spatial sensitivity and noise:
-
 * **Raw sEEG LFP (`TrialData`):** Unreferenced contact voltage $V_i(t)$.
+
 * **Common-Average Reference (`Common`):** Subtracts the mean signal across all selected shaft contacts:
-  $$V^{\text{CAR}}_i(t) = V_i(t) - \frac{1}{N} \sum_{j=1}^{N} V_j(t)$$
-  *Reduces global/shared noise across the array; may attenuate broadly distributed activity.*
+
+$$V^{\text{CAR}}_i(t) = V_i(t) - \frac{1}{N} \sum_{j=1}^{N} V_j(t)$$
+
+*Reduces global/shared noise across the array; may attenuate broadly distributed activity.*
+
 * **Laplacian Reference (`Laplacian`):** Subtracts the average of the two immediately adjacent contacts along the same shaft:
-  $$V^{\text{LAP}}_i(t) = V_i(t) - \frac{V_{i-1}(t) + V_{i+1}(t)}{2}$$
-  *Suppresses volume-conducted signals and isolates spatially focal neural activity.*
+
+$$V^{\text{LAP}}_i(t) = V_i(t) - \frac{V_{i-1}(t) + V_{i+1}(t)}{2}$$
+
+*Suppresses volume-conducted signals and isolates spatially focal neural activity.*
 
 > **Research Opportunity:** Attendees are encouraged to benchmark decoding accuracy across raw (`TrialData`), `Common`, and `Laplacian` signals to evaluate how spatial filtering impacts classification performance.
 
@@ -93,3 +97,10 @@ This project requires MATLAB (R2022b or later recommended) with the Statistics a
 ```bash
 git clone [https://github.com/oDtsou/human-decoding-hackathon.git](https://github.com/oDtsou/human-decoding-hackathon.git)
 cd human-decoding-hackathon
+```
+Then, open MATLAB, navigate to the cloned directory, and run the following in the MATLAB Command Window:
+
+```Matlab
+% Add all subfolders to the MATLAB search path
+addpath(genpath(pwd));
+savepath;
