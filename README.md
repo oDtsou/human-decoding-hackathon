@@ -6,85 +6,82 @@ This project explores how the human prefrontal cortex dynamically encodes and ma
 
 ---
 
-## 📂 The Data
-Because the raw data files are incredibly large (~2 GB each), **we do not upload them to GitHub**. 
+## 📂 The Data & Sharing Permissions
+
+### Data-Use and Sharing Policy
+The intracranial sEEG recordings provided for this hackathon contain de-identified human electrophysiological research data. 
+* **Permitted Use:** These data are provided exclusively for academic, educational, and benchmarking purposes within the scope of BrainHack Vanderbilt 2026.
+* **Redistribution:** Do not redistribute, publicly host, or share these download links outside of the event without prior consent from the lab.
+
+Because raw data files are large (~2 GB each), **they are not tracked in GitHub**.
 
 * **Full Datasets (Download Here):** 
-  * *Spatial Task Dataset* (https://vanderbilt.box.com/s/gfh6lnjqqzm0n31gty8c4h3jj82rbnyn)
-  * *Feature Task Dataset* (https://vanderbilt.box.com/s/jw50ka2281j2dh95it49dle5qbdvftpb)
-
-### Data Format & Schema
-The data are stored in `.mat` files containing a single variable `SEEG`, which is a `1 × N` struct array where `N` is the number of channels. Each element in the array represents a unique recording channel pooled across different subjects. 
-
-Each channel struct has the following fields:
-*   `Sub`: Subject identifier (string/character array)
-*   `Task`: Task type (e.g., `'Delay3s'` or `'MNM'`)
-*   `Condition`: Experimental condition metadata
-*   `Channel`: Numeric channel ID
-*   `Channel_Label`: Clinical label of the electrode contact
-*   `subRegion`: Specific anatomical subregion location
-*   `Prefrontal_subdiv`: Prefrontal subdivision (e.g., `'Dorsal'`, `'Ventral'`) used for our primary comparative analysis
-*   `Hemisphere`: Hemisphere of the implant
-*   `CorrectTrials` or `Correct`: A struct array containing trials that were performed correctly. Each element/trial in this array has the following fields for which we care about:
-    *   `Class`: The stimulus class location (1-9 or 1-8)
-    *   `TrialData`: The raw time-series voltage data for the trial
-    *   `Common`: Common-average reference (CAR) filtered time-series data
-    *   `Laplacian`: Local Laplacian-filtered time-series data
-    *   *(Note: CueShape, MatchShape etc are task-phase metadata which can be bypassed for standard decoding)*
+  * [Spatial Task Dataset](https://vanderbilt.box.com/s/gfh6lnjqqzm0n31gty8c4h3jj82rbnyn)
+  * [Feature Task Dataset](https://vanderbilt.box.com/s/jw50ka2281j2dh95it49dle5qbdvftpb)
 
 ---
 
-### Quickstart: Accessing Trials and Filter Variants
+## 📋 Data Format & Schema
 
-#### In MATLAB:
-```matlab
-% Load the dataset
-load('... .mat'); % Loads the SEEG struct array
+The data are stored in `.mat` files containing a single variable `SEEG`, which is a `1 × N` struct array where `N` is the number of channels pooled across subjects.
 
-% Get the class and Laplacian-filtered data for the first correct trial of Channel 1
-first_trial = SEEG(1).CorrectTrials(1);
-trial_class = first_trial.Class;
-trial_signal = first_trial.Laplacian; % You can also use .TrialData or .Common
+Each channel struct includes:
+* `Sub`: Subject identifier (e.g., `'sub-01'`)
+* `Task`: Task type (`'Delay3s'` or `'MNM'`)
+* `Condition`: Experimental condition metadata
+* `Channel`: Numeric channel ID
+* `Channel_Label`: Clinical label of the electrode contact
+* `subRegion`: Specific anatomical subregion
+* `Prefrontal_subdiv`: Prefrontal subdivision (`'Dorsal'`, `'Ventral'`) used for primary comparative analysis
+* `Hemisphere`: Hemisphere of the implant (`'L'` or `'R'`)
+* `CorrectTrials` / `Correct`: Struct array containing successfully completed trials with fields:
+  * `Class`: Stimulus class label (`1–9` or `'1–8'`)
+  * `TrialData`: Raw time-series voltage data
+  * `Common`: Common-average reference (CAR) filtered time-series data
+  * `Laplacian`: Local Laplacian-filtered time-series data
 
-% Quick check: Count how many correct trials exist for this channel
-num_correct = length(SEEG(1).Correct);
-```
+---
+
+## 🔬 Signal Referencing Schemes
+
+Stereo-EEG local field potentials (LFPs) are processed using two spatial re-referencing methods to control spatial sensitivity and noise:
+
+* **Raw sEEG LFP (`TrialData`):** Unreferenced contact voltage $V_i(t)$.
+* **Common-Average Reference (`Common`):** Subtracts the mean signal across all selected shaft contacts:
+  $$V^{\text{CAR}}_i(t) = V_i(t) - \frac{1}{N} \sum_{j=1}^{N} V_j(t)$$
+  *Reduces global/shared noise across the array; may attenuate broadly distributed activity.*
+* **Laplacian Reference (`Laplacian`):** Subtracts the average of the two immediately adjacent contacts along the same shaft:
+  $$V^{\text{LAP}}_i(t) = V_i(t) - \frac{V_{i-1}(t) + V_{i+1}(t)}{2}$$
+  *Suppresses volume-conducted signals and isolates spatially focal neural activity.*
+
+> **Research Opportunity:** Attendees are encouraged to benchmark decoding accuracy across raw (`TrialData`), `Common`, and `Laplacian` signals to evaluate how spatial filtering impacts classification performance.
+
 ---
 
 ## 🚀 BrainHack Milestones
 
 ### 🟢 Milestone 1: Data Cleaning & Visualization (Low Complexity)
-* **Goal:** Parse the raw `.mat` files. Identify and filter out clinical channels that lack a sufficient trial count per class.
-* **Deliverable:** A script (`scripts/...`) that returns "viable" channels and plots their power spectra.
+* **Goal:** Parse `.mat` files, evaluate trial balances across classes, and remove noisy/sparse channels.
+* **Deliverable:** Run and extend `scripts/visualization.m` to plot raw vs. CAR vs. Laplacian traces and power spectral densities (PSD).
 
 ### 🟡 Milestone 2: Feature Engineering (Medium Complexity)
-* **Goal:** Benchmark alternative features against our baseline 70–150 Hz high-gamma moving average.
-* **Deliverable:** Implement alternative features in `scripts/...`.
+* **Goal:** Extract time-frequency features (e.g., 70–150 Hz high-gamma power, multi-band power spectral densities, wavelets) to improve signal representation.
+* **Deliverable:** Create feature extraction pipelines in `scripts/feature_extraction.m`.
 
 ### 🔴 Milestone 3: Time-Resolved Low-Sample Decoding (High Complexity)
-* **Goal:** Build time-resolved classifiers (which handle small sample sizes like our 3 trials/class brilliantly) to decode classes.
-* **Deliverable:** Map and compare decoding accuracies over time between the **Dorsal** and **Ventral** subregions.
+* **Goal:** Build classifiers (e.g., Support Vector Machines with RBF kernels, regularized LDA) capable of decoding task variables with small per-class sample sizes (~3 trials/class).
+* **Deliverable:** Compare temporal decoding trajectories between **Dorsal** and **Ventral** prefrontal subdivisions in `scripts/decode_subregions.m`.
 
 ---
 
-## 📖 Scientific Background & Baseline Logic
-Before diving into code, please read our comprehensive decoding draft document:
-👉 **[Read the Decoding Logic & Existing Results Guide](docs/DecodingLogic_Hackathon.pdf)**
+## 🛠️ Getting Started & Prerequisites
 
-This document details the logic behind our current high-gamma SVM approach and shows our existing Non-Human Primate (NHP) and human decoding results.
+### 1. MATLAB Installation & Licensing
+This project requires MATLAB (R2022b or later recommended) with the Statistics and Machine Learning Toolbox and Signal Processing Toolbox.
+* Download & installation instructions: [Vanderbilt Software Store - MATLAB](https://engineering.vanderbilt.edu/sds/matlab)
+* *Note:* A valid Vanderbilt University MATLAB license is required ([License Portal](https://engineering.vanderbilt.edu/sds/matlab/)).
 
----
-
-## 🛠️ Getting Started (MATLAB Setup)
-Clone the repository and install the required dependencies:
+### 2. Repository Setup
 ```bash
 git clone [https://github.com/oDtsou/human-decoding-hackathon.git](https://github.com/oDtsou/human-decoding-hackathon.git)
 cd human-decoding-hackathon
-```
-```matlab
-% Add project directories to path
-addpath(genpath(pwd));
-savepath;
-```
-
-
