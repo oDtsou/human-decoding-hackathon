@@ -77,6 +77,11 @@ $$V^{\text{LAP}}_i(t) = V_i(t) - \frac{V_{i-1}(t) + V_{i+1}(t)}{2}$$
   * **Continuous vs. Binned Signal:** Test feature extraction across the entire continuous trial time course versus static epoch/bin averages.
   * **Multi-Band Spectral Fusion:** Extract and combine features from multiple canonical frequency bands simultaneously (e.g., theta, beta, and high-gamma).
   * Implement these pipelines in `scripts/feature_extraction.m`.
+ 
+👉 To speed up signal filtering and feature extraction, starter utilities are provided in `utils/`:
+* `utils/eegfilt.m`: Two-way least-squares FIR bandpass filter.
+* `utils/BandpassAmplitudeEnvelope.m`: Computes Hilbert analytic amplitude envelopes.
+* `scripts/extract_bandpass_features.m`: Demonstrates how to iterate across channels, extract frequency-band envelopes (e.g., high-gamma 70–150 Hz), and separate matrices by **Dorsal** vs. **Ventral** subdivisions.
 
 ---
 
