@@ -71,13 +71,29 @@ $$V^{\text{LAP}}_i(t) = V_i(t) - \frac{V_{i-1}(t) + V_{i+1}(t)}{2}$$
        1. Download the dataset and place it in the `data/` folder.
        2. Open and run `scripts/visualization.m` in MATLAB.
 
-### 🟡 Milestone 2: Feature Engineering (Medium Complexity)
-* **Goal:** Extract time-frequency features (e.g., 70–150 Hz high-gamma power, multi-band power spectral densities, wavelets) to improve signal representation.
-* **Deliverable:** Create feature extraction pipelines in `scripts/feature_extraction.m`.
+### 🟡 Milestone 2: Feature Engineering & Dimensionality Reduction (Medium Complexity)
+* **Goal:** Benchmark alternative feature representations against the baseline 70–150 Hz high-gamma moving-average envelope.
+* **Deliverables & Tasks:**
+  * **Continuous vs. Binned Signal:** Test feature extraction across the entire continuous trial time course versus static epoch/bin averages.
+  * **Multi-Band Spectral Fusion:** Extract and combine features from multiple canonical frequency bands simultaneously (e.g., theta, beta, and high-gamma).
+  * Implement these pipelines in `scripts/feature_extraction.m`.
 
-### 🔴 Milestone 3: Time-Resolved Low-Sample Decoding (High Complexity)
-* **Goal:** Build classifiers (e.g., Support Vector Machines with RBF kernels, regularized LDA) capable of decoding task variables with small per-class sample sizes (~3 trials/class).
-* **Deliverable:** Compare temporal decoding trajectories between **Dorsal** and **Ventral** prefrontal subdivisions in `scripts/decode_subregions.m`.
+---
+
+### 🔴 Milestone 3: Time-Resolved Decoding & Subregion Dynamics (High Complexity)
+* **Goal:** Build classifiers (e.g., Support Vector Machines with RBF kernels, regularized LDA) resilient to low-sample regimes (~3 trials per class) to decode spatial and feature targets over time.
+* **Deliverables:**
+  * Compute and contrast time-resolved classification trajectories between **Dorsal** and **Ventral** prefrontal subdivisions.
+  * Identify latency peaks to determine which subregion encodes task variables earlier during the cue presentation and maintains them throughout the delay period.
+  * Implement in `scripts/decode_subregions.m`.
+
+---
+
+### 🟣 Milestone 4: Advanced Modeling & Benchmarking (Wish List / Extension)
+* **Goal:** Optimize pipeline robustness and evaluate core neuroengineering hypotheses.
+* **Deliverables & Tasks:**
+  * **Spatial Referencing Benchmark:** Systematically compare decoding accuracy across **Raw-ONLY**, **Common-ONLY**, and **Laplacian-ONLY** signals to determine which reference optimizes neural discriminability.
+  * **Resampling & Synthetic Trials:** Develop strategies to overcome sample-size constraints (e.g., trial smoothing, jittering, or synthetic interpolation) to train on >3 trials per class.
 
 ---
 
