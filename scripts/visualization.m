@@ -1,5 +1,5 @@
 %% BrainHack Vandy 2026: 
-% For example:
+
 % Milestone 1 - Signal Inspection & Visualization
 % This script loads a sample sEEG dataset, inspects channel trial counts,
 % and compares Raw, Common-Average, and Laplacian referenced signals.
