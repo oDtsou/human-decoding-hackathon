@@ -128,3 +128,10 @@ Then, open MATLAB, navigate to the cloned directory, and run the following in th
 % Add all subfolders to the MATLAB search path
 addpath(genpath(pwd));
 savepath;
+```
+
+### 3. Python Setup (Alternative to MATLAB)
+If you prefer developing in Python , install the required numerical and signal processing packages:
+
+```bash
+pip install -r requirements.txt
