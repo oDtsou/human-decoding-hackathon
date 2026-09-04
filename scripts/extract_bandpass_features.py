@@ -45,9 +45,9 @@ LO_FREQ = 70.0      # High-Gamma lower cutoff (Hz)
 HI_FREQ = 150.0     # High-Gamma upper cutoff (Hz)
 FS = 512           # Sampling rate (Hz)
 
-# Python 0-indexed slice matching MATLAB's 513:2500 (inclusive)
+# Spatial: 513:3072 / Shape: 513:4864 (remove Inter-Trial Period)
 TIME_START = 513
-TIME_END = 2500
+TIME_END = 3072
 
 REF_SCHEME = 'Laplacian'  # 'TrialData', 'Common', or 'Laplacian'
 DATA_PATH = 'data/Spatial_Task_SEEG.mat'
